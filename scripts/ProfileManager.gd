@@ -6,8 +6,8 @@ class_name ProfileManager
 const PROFILE_PATH := "user://profile.json"
 
 var best_score: Dictionary = {}
-var last_camera_index := 0
-var totals := {
+var last_camera_index: int = 0
+var totals: Dictionary = {
     "matches": {
         "correct": 0,
         "false": 0,
@@ -27,8 +27,8 @@ func load_profile() -> void:
         save_profile()
         return
 
-    var file := FileAccess.open(PROFILE_PATH, FileAccess.READ)
-    var result := JSON.parse_string(file.get_as_text())
+    var file: FileAccess = FileAccess.open(PROFILE_PATH, FileAccess.READ)
+    var result: Variant = JSON.parse_string(file.get_as_text())
     if typeof(result) != TYPE_DICTIONARY:
         push_warning("Profile data was not a dictionary; resetting to defaults.")
         save_profile()
@@ -36,13 +36,13 @@ func load_profile() -> void:
 
     best_score = result.get("best_score", best_score)
     last_camera_index = int(result.get("last_camera_index", last_camera_index))
-    var totals_data := result.get("totals", totals)
-    if typeof(totals_data) == TYPE_DICTIONARY:
-        totals = totals_data
+    var totals_value: Variant = result.get("totals", null)
+    if totals_value is Dictionary:
+        totals = totals_value
 
 func save_profile() -> void:
-    var file := FileAccess.open(PROFILE_PATH, FileAccess.WRITE)
-    var data := {
+    var file: FileAccess = FileAccess.open(PROFILE_PATH, FileAccess.WRITE)
+    var data: Dictionary = {
         "best_score": best_score,
         "last_camera_index": last_camera_index,
         "totals": totals,
@@ -50,7 +50,7 @@ func save_profile() -> void:
     file.store_string(JSON.stringify(data, "\t"))
 
 func update_best_score(difficulty: String, score: int) -> void:
-    var current_best := int(best_score.get(difficulty, 0))
+    var current_best: int = int(best_score.get(difficulty, 0))
     if score > current_best:
         best_score[difficulty] = score
         save_profile()
@@ -60,7 +60,7 @@ func record_camera_index(index: int) -> void:
     save_profile()
 
 func record_match_result(result_type: String) -> void:
-    var matches := totals.get("matches", {})
+    var matches: Dictionary = totals.get("matches", {})
     if not matches.has(result_type):
         push_warning("Unknown match result type: %s" % result_type)
         return
@@ -69,7 +69,7 @@ func record_match_result(result_type: String) -> void:
     save_profile()
 
 func record_photo(good: bool) -> void:
-    var photos := totals.get("photos", {})
+    var photos: Dictionary = totals.get("photos", {})
     photos["total"] = int(photos.get("total", 0)) + 1
     if good:
         photos["good"] = int(photos.get("good", 0)) + 1
