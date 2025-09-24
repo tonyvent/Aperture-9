@@ -1,5 +1,4 @@
 extends Node
-class_name GameSettings
 
 ## Autoload responsible for storing and applying runtime settings.
 ##
