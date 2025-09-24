@@ -1,0 +1,50 @@
+[gd_scene load_steps=14 format=3]
+
+[ext_resource type="Script" path="res://scripts/GameManager.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/CameraNetwork.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/NPCSpawner.gd" id="3"]
+[ext_resource type="Script" path="res://scripts/TargetManager.gd" id="4"]
+[ext_resource type="Script" path="res://scripts/Scanner.gd" id="5"]
+[ext_resource type="Script" path="res://scripts/SnapshotManager.gd" id="6"]
+[ext_resource type="PackedScene" path="res://ui/HUD.tscn" id="7"]
+[ext_resource type="PackedScene" path="res://ui/MiniMap.tscn" id="8"]
+[ext_resource type="PackedScene" path="res://ui/StaticOverlay.tscn" id="9"]
+[ext_resource type="PackedScene" path="res://ui/PauseMenu.tscn" id="10"]
+[ext_resource type="PackedScene" path="res://ui/SummaryPanel.tscn" id="11"]
+[ext_resource type="PackedScene" path="res://ui/SettingsPanel.tscn" id="12"]
+[ext_resource type="PackedScene" path="res://ui/ControlsOverlay.tscn" id="13"]
+[ext_resource type="PackedScene" path="res://ui/ProfilePanel.tscn" id="14"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1")
+
+[node name="CameraNetwork" type="Node" parent="."]
+script = ExtResource("2")
+
+[node name="NPCSpawner" type="Node" parent="."]
+script = ExtResource("3")
+
+[node name="TargetManager" type="Node" parent="."]
+script = ExtResource("4")
+
+[node name="Scanner" type="Node" parent="."]
+script = ExtResource("5")
+
+[node name="SnapshotManager" type="Node" parent="."]
+script = ExtResource("6")
+
+[node name="HUD" parent="." instance=ExtResource("7")]
+
+[node name="MiniMap" parent="." instance=ExtResource("8")]
+
+[node name="StaticOverlay" parent="." instance=ExtResource("9")]
+
+[node name="PauseMenu" parent="." instance=ExtResource("10")]
+
+[node name="SummaryPanel" parent="." instance=ExtResource("11")]
+
+[node name="SettingsPanel" parent="." instance=ExtResource("12")]
+
+[node name="ControlsOverlay" parent="." instance=ExtResource("13")]
+
+[node name="ProfilePanel" parent="." instance=ExtResource("14")]
