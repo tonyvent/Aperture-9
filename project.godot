@@ -10,6 +10,16 @@ config_version=5
 
 [application]
 
-config/name="Aperature 9"
+config/name="Aperture Nine"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
+run/main_scene="res://scenes/Title.tscn"
+
+[audio]
+
+bus/layout="res://default_bus_layout.tres"
+
+[autoload]
+
+GameSettings="*res://scripts/GameSettings.gd"
+ProfileManager="*res://scripts/ProfileManager.gd"
